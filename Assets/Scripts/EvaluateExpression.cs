@@ -8,10 +8,6 @@ public class EvaluateExpression : MonoBehaviour
 {
 
     public TMP_Text expressionText;
-    //public TMP_Text resultText;
-    //public TMP_Text resultText2;
-    //public TMP_Text resultText3;
-    //public TMP_Text resultText4;
     private TMP_Text childText;
 
     private System.Random random;
@@ -21,16 +17,11 @@ public class EvaluateExpression : MonoBehaviour
 
     void Start()
     {
-        
         random = new System.Random();
 
         string expression =  expressionText.text;
-        Debug.Log(expression);
 
         float result = EvaluateMathExpression(expression);
-        Debug.Log(result);
-
-        //resultText.text = result.ToString();
         AssignRandomCells(result);
     }
 
@@ -47,21 +38,16 @@ public class EvaluateExpression : MonoBehaviour
             childObjects[i] = transform.GetChild(i);
 
             childText = childObjects[i].GetComponent<TMP_Text>();
-            Debug.Log(childText);
 
             if (childText != null) {
-
                 double randomValue = random.NextDouble() * (result);
-                Debug.Log(randomValue);
                 childText.text = randomValue.ToString();
             }
         } 
 
         int rand_cell = random.Next(0, numChildObjects);
-        Debug.Log(rand_cell);
         childText = childObjects[rand_cell].GetComponent<TMP_Text>();
         childText.text =  result.ToString();
-
 
     } 
 
