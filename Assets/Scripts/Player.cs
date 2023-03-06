@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
 
         // In this way consider the player as a capsule and so non rischio che parte del corpo attraversi l'oggetto
         bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDir, moveDistance);
-
+        
         if (!canMove)
         {
             // Cannot move towards moveDir
@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
                     // Cannot move in any direction
                 }
             }
-        }
+        } 
 
         if (canMove)
         {
