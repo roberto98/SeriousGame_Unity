@@ -4,63 +4,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // I show on the unity editor the variable to modify, and i keep it private so other classes cannot modify it
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private GameInput gameInput;
-   // [SerializeField] private LayerMask countersLayerMask;
 
     private Vector3 lastInteractDir;
 
     // Update is called once per frame
     private void Update(){
         HandleMovement();
-      //  HandleInteractions();
     }
-
-    /*
-
-    private void HandleInteractions()
-    {
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
-
-        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
-
-        // I save last direction because i stop moving and i'm in front of the object, i still want to interact with it
-        if (moveDir != Vector3.zero)
-        {
-            lastInteractDir = moveDir;
-        }
-
-        float interactDistance = 2f;
-        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, countersLayerMask))
-        {
-            // Takes the type of component
-            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
-            {
-                // Has ClearCounter
-                clearCounter.Interact();
-               // if (baseCounter != selectedCounter)
-               // {
-               //     SetSelectedCounter(baseCounter);
-               // }
-            }
-            else
-            {
-                //SetSelectedCounter(null);
-
-            }
-        }
-        else
-        {
-            //SetSelectedCounter(null);
-        }
-    } */
 
     private void HandleMovement()
     {
@@ -120,19 +74,5 @@ public class Player : MonoBehaviour
         float rotateSpeed = 10f;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
     }
-
-    /*
-    private void SetSelectedCounter(BaseCounter selectedCounter)
-    {
-        this.selectedCounter = selectedCounter;
-
-        OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
-        {
-            selectedCounter = selectedCounter
-        });
-    }
-    */
-
-
 
 }

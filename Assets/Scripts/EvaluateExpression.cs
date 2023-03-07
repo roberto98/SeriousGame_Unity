@@ -40,7 +40,11 @@ public class EvaluateExpression : MonoBehaviour
             childText = childObjects[i].GetComponent<TMP_Text>();
 
             if (childText != null) {
-                double randomValue = random.NextDouble() * (result);
+
+                float minValue = result-10;
+                float maxValue = result+10;
+
+                double randomValue = (float)(random.NextDouble() * (maxValue - minValue) + minValue);
                 childText.text = randomValue.ToString();
             }
         } 
