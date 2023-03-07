@@ -7,14 +7,13 @@ public class Player : MonoBehaviour
 
     // I show on the unity editor the variable to modify, and i keep it private so other classes cannot modify it
     [SerializeField] private float moveSpeed = 10f;
-    private float raycastDistance = 0.5f;
     [SerializeField] private GameInput gameInput;
 
     private Vector3 lastInteractDir;
     private Rigidbody rb;
 
-    void Start () {
-            rb = GetComponent<Rigidbody>();
+    private void Start () {
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -29,19 +28,22 @@ public class Player : MonoBehaviour
     }
 
     private bool ObstacleInFront(Vector3 position) {
-        // Cast a ray in the movement direction to detect obstacles
-        RaycastHit hit;
-        if (Physics.Raycast(position, transform.forward, out hit, raycastDistance)) {
-            if (hit.collider.CompareTag("Wall")) {
-                return true;
-            }
+        float radius = 0.7f; // Set the radius of the capsule
+        float height = 2f; // Set the height of the capsule
+        Vector3 direction = transform.forward; // Set the direction to cast the capsule
+        float raycastDistance = 2f; // Set the maximum distance to cast the capsule
+        int layerMask = LayerMask.GetMask("Wall"); // Set the layer mask to only detect walls
+
+        // Cast a capsule in the movement direction to detect obstacles
+        if (Physics.CapsuleCast(position + new Vector3(0, height / 2 - radius, 0), position + new Vector3(0, height / 2 + radius, 0), radius, direction, out RaycastHit hit, raycastDistance, layerMask))
+        {
+            return true;
         }
         return false;
     }
 
-    private void HandleMovement()
-    {
-        // Time.fixedDeltaTime is used for physics calculations
+    private void HandleMovement() {
+        // Time.fixedDeltaTime is used for physics calculations, we are using a rigid body
         float moveDistance = moveSpeed * Time.fixedDeltaTime;
 
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
@@ -49,9 +51,30 @@ public class Player : MonoBehaviour
         // Position is vector3 (has x,y,z) so i've to cast my vector2 input
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
-
         // Check for obstacles before moving the player
-        if (!ObstacleInFront(transform.position + moveDir)) {
+        bool canMove = !ObstacleInFront(transform.position + moveDir);
+
+        if (!canMove){ // Cannot move towards moveDir
+            // Attempt only X movement
+            Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
+            canMove = (moveDir.x < -.5f || moveDir.x > +.5f) && !ObstacleInFront(transform.position + moveDir);
+
+            if (canMove) { // Can move only on the X
+                
+                moveDir = moveDirX;
+            } else { // Cannot move only on the X
+                // Attempt only Z movement
+                Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
+                canMove = (moveDir.z < -.5f || moveDir.z > +.5f) && !ObstacleInFront(transform.position + moveDir);
+                if (canMove) { // Can move only on the Z
+                    moveDir = moveDirZ;
+                } else {
+                    // Cannot move in any direction
+                }
+            }
+        }
+
+        if (canMove) {
             // Move the player in the desired direction
             rb.MovePosition(transform.position + moveDir * moveDistance);
         }
