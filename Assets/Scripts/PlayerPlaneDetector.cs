@@ -4,34 +4,28 @@ using UnityEngine;
 
 public class PlayerPlaneDetector : MonoBehaviour
 {
-    public GameObject plane;
 
-    private BoxCollider planeCollider;
-
-    private void Start()
-    {
-        planeCollider = plane.GetComponent<BoxCollider>();
-        Debug.Log(planeCollider);
-    }
+    private bool playerInPlane = false;
 
     private void OnTriggerEnter(Collider other)
     {
-         Debug.Log("Qui2");
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("Qui");
-            if (planeCollider.bounds.Contains(other.transform.position))
-            {
-                Debug.Log("Player is in the area of the plane!");
-            }
+            playerInPlane = true;
+            Debug.Log("Player entered the plane.");
+            GetComponent<Renderer>().material.color = Color.black;
+            // Add any actions you want to trigger when the player enters the plane
         }
     }
-
+    
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            Debug.Log("Player has left the area of the plane.");
+            playerInPlane = false;
+            Debug.Log("Player left the plane.");
+            GetComponent<Renderer>().material.color = Color.green;
+            // Add any actions you want to trigger when the player leaves the plane
         }
     }
 }

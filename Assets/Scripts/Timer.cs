@@ -25,6 +25,6 @@ public class Timer : MonoBehaviour
         }
 
         // Update the text object with the current time left
-        timerText.text = "Timer\n" + Mathf.RoundToInt(timeLeft).ToString();
+        timerText.text = "Time left:\n" + Mathf.RoundToInt(timeLeft).ToString();
     }
 }
