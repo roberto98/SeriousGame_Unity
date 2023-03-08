@@ -1345,13 +1345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e49a07f9291324082a8e5b52ce7704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minNumber: 1
-  maxNumber: 10
-  operators:
-  - +
-  - '-'
-  - '*'
-  - /
+  currentLevel: 0
   expressionText: {fileID: 1758056383}
 --- !u!1 &1067688534
 GameObject:
@@ -2749,6 +2743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922892da491828f4da8cd35ab2d4b253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  generateExpression: {fileID: 1010045835}
   evaluateExpression: {fileID: 274595997}
   timer: {fileID: 2066968336}
   player: {fileID: 1982947657}
@@ -2958,8 +2953,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b31b2bae2f595824980032e42d9a3e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeft: 10
+  timeLeft: 7
   timerText: {fileID: 528035969}
+  player: {fileID: 1982947657}
 --- !u!1 &2068157314
 GameObject:
   m_ObjectHideFlags: 0

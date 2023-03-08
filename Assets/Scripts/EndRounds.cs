@@ -7,6 +7,7 @@ using TMPro;
 
 public class EndRounds : MonoBehaviour
 {
+    public GenerateExpression generateExpression;
     public EvaluateExpression evaluateExpression;
     public Timer timer;
     public Player player;
@@ -31,6 +32,7 @@ public class EndRounds : MonoBehaviour
                     countdownLevel.text = "YOU WIN!\nNext round in...\n"+Mathf.RoundToInt(roundTimer).ToString();
 
                     if(roundTimer<=0){
+                        //generateExpression.currentLevel+=1;
                         SceneManager.LoadScene("GameScene");
                     }
 
