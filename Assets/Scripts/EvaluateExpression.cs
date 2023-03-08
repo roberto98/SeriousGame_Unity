@@ -13,7 +13,7 @@ public class EvaluateExpression : MonoBehaviour
     private System.Random random;
     
     public Transform[] childObjects;
-
+    public int indexTrueCell;
 
     void Start()
     {
@@ -49,13 +49,13 @@ public class EvaluateExpression : MonoBehaviour
             }
         } 
 
-        int rand_cell = random.Next(0, numChildObjects);
-        childText = childObjects[rand_cell].GetComponent<TMP_Text>();
+        indexTrueCell = random.Next(0, numChildObjects);
+        childText = childObjects[indexTrueCell].GetComponent<TMP_Text>();
         childText.text =  result.ToString();
 
     } 
 
-    float EvaluateMathExpression(string expression)
+    public float EvaluateMathExpression(string expression)
     {
         string[] elements = expression.Split(' ');
 

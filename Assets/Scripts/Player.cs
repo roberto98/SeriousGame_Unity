@@ -84,4 +84,48 @@ public class Player : MonoBehaviour
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
     }
 
+
+
+    public int triggeredCell = -1; // -1 indicates no cell has been triggered
+    public bool playerInPlane = false;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Cell1"))
+        {
+            playerInPlane = true;
+            other.GetComponent<Renderer>().material.color = new Color32(98, 104, 245, 100);
+            triggeredCell = 1;
+        }
+        else if (other.CompareTag("Cell2"))
+        {
+            playerInPlane = true;
+            other.GetComponent<Renderer>().material.color = new Color32(98, 104, 245, 100);
+            triggeredCell = 2;
+        }
+        else if (other.CompareTag("Cell3"))
+        {
+            playerInPlane = true;
+            other.GetComponent<Renderer>().material.color = new Color32(98, 104, 245, 100);
+            triggeredCell = 3;
+        }
+        else if (other.CompareTag("Cell4"))
+        {
+            playerInPlane = true;
+            other.GetComponent<Renderer>().material.color = new Color32(98, 104, 245, 100);
+            triggeredCell = 4;
+        }
+
+        //Debug.Log("Player entered cell " + triggeredCell);
+        
+    }
+
+    
+    private void OnTriggerExit(Collider other)
+    {
+        playerInPlane = false;
+        //Debug.Log("Player left the plane.");
+        other.GetComponent<Renderer>().material.color =new Color32(98, 184, 245, 255); 
+    }
+
 }
