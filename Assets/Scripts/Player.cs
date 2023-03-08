@@ -95,25 +95,25 @@ public class Player : MonoBehaviour
         {
             playerInPlane = true;
             other.GetComponent<Renderer>().material.color = new Color32(98, 104, 245, 100);
-            triggeredCell = 1;
+            triggeredCell = 0;
         }
         else if (other.CompareTag("Cell2"))
         {
             playerInPlane = true;
             other.GetComponent<Renderer>().material.color = new Color32(98, 104, 245, 100);
-            triggeredCell = 2;
+            triggeredCell = 1;
         }
         else if (other.CompareTag("Cell3"))
         {
             playerInPlane = true;
             other.GetComponent<Renderer>().material.color = new Color32(98, 104, 245, 100);
-            triggeredCell = 3;
+            triggeredCell = 2;
         }
         else if (other.CompareTag("Cell4"))
         {
             playerInPlane = true;
             other.GetComponent<Renderer>().material.color = new Color32(98, 104, 245, 100);
-            triggeredCell = 4;
+            triggeredCell = 3;
         }
 
         //Debug.Log("Player entered cell " + triggeredCell);

@@ -22,7 +22,7 @@ public class GenerateExpression : MonoBehaviour
         expressionText.text = expression + " = ?";
     }
 
-    string GenerateMathExpression()
+    public string GenerateMathExpression()
     {
         int num1 = random.Next(minNumber, maxNumber + 1);
         string op1 = operators[random.Next(operators.Length)];
