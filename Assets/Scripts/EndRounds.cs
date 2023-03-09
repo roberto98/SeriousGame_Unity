@@ -17,7 +17,8 @@ public class EndRounds : MonoBehaviour
     public LevelManager levelManager;
 
     public float roundTimer = 5.0f;
-
+    private bool hasPlayedSound = false;
+    
     void Start(){
         trueCell = evaluateExpression.indexTrueCell;
         //winSound.GetComponent<AudioSource>();
@@ -32,9 +33,13 @@ public class EndRounds : MonoBehaviour
                     
                     roundTimer-=Time.deltaTime;
 
-                    soundsController.PlayWin();
                     // Countdown before next Level
                     countdownLevel.text = "YOU WIN!\nNext round in...\n"+Mathf.RoundToInt(roundTimer).ToString();
+
+                    if (!hasPlayedSound) {
+                        soundsController.PlayWin();
+                        hasPlayedSound = true;
+                    }
 
                     if(roundTimer<=0){
                         levelManager.LevelComplete();                    
@@ -43,8 +48,12 @@ public class EndRounds : MonoBehaviour
                 } else { // Player lose -> Load scene GameOver
                     
                     roundTimer-=Time.deltaTime;
-                    soundsController.PlayLose();
                     countdownLevel.text = "YOU LOSE!\nBack to menu in...\n"+Mathf.RoundToInt(roundTimer).ToString();
+
+                    if (!hasPlayedSound) {
+                        soundsController.PlayLose();
+                        hasPlayedSound = true;
+                    }
 
                     if(roundTimer<=0){
                         levelManager.GameOver();
@@ -53,8 +62,12 @@ public class EndRounds : MonoBehaviour
 
             } else {
                     roundTimer-=Time.deltaTime;
-                    soundsController.PlayLose();
                     countdownLevel.text = "YOU LOSE!\nBack to menu in...\n"+Mathf.RoundToInt(roundTimer).ToString();
+
+                    if (!hasPlayedSound) {
+                        soundsController.PlayLose();
+                        hasPlayedSound = true;
+                    }
 
                     if(roundTimer<=0){
                         levelManager.GameOver();
