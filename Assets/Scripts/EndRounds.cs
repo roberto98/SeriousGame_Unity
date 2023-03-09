@@ -21,7 +21,6 @@ public class EndRounds : MonoBehaviour
     
     void Start(){
         trueCell = evaluateExpression.indexTrueCell;
-        //winSound.GetComponent<AudioSource>();
     }
 
     void Update(){
