@@ -34,7 +34,7 @@ public class EndRounds : MonoBehaviour
                     roundTimer-=Time.deltaTime;
 
                     // Countdown before next Level
-                    countdownLevel.text = "YOU WIN!\nNext round in...\n"+Mathf.RoundToInt(roundTimer).ToString();
+                    countdownLevel.text = "CORRECT!\nNext round in...\n"+Mathf.RoundToInt(roundTimer).ToString();
 
                     if (!hasPlayedSound) {
                         soundsController.PlayWin();
@@ -48,7 +48,7 @@ public class EndRounds : MonoBehaviour
                 } else { // Player lose -> Load scene GameOver
                     
                     roundTimer-=Time.deltaTime;
-                    countdownLevel.text = "YOU LOSE!\nBack to menu in...\n"+Mathf.RoundToInt(roundTimer).ToString();
+                    countdownLevel.text = "WRONG!\nBack to menu in...\n"+Mathf.RoundToInt(roundTimer).ToString();
 
                     if (!hasPlayedSound) {
                         soundsController.PlayLose();
@@ -62,7 +62,7 @@ public class EndRounds : MonoBehaviour
 
             } else {
                     roundTimer-=Time.deltaTime;
-                    countdownLevel.text = "YOU LOSE!\nBack to menu in...\n"+Mathf.RoundToInt(roundTimer).ToString();
+                    countdownLevel.text = "WRONG!\nBack to menu in...\n"+Mathf.RoundToInt(roundTimer).ToString();
 
                     if (!hasPlayedSound) {
                         soundsController.PlayLose();

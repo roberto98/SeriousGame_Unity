@@ -21,19 +21,6 @@ public class GamePauseUI : MonoBehaviour
             TogglePauseGame();
         }
     }
-    /*
-    public void Resume(){
-        pausedMenuUI.SetActive(false);
-        Time.timeScale = 1.0f;
-        
-    }
-    
-    void Pause(){
-        pausedMenuUI.SetActive(true);
-        Time.timeScale = 0.0f;
-        GameIsPaused = true;
-    }
-    */
 
     public void TogglePauseGame() {
         isGamePaused = !isGamePaused;
@@ -45,8 +32,6 @@ public class GamePauseUI : MonoBehaviour
             pausedMenuUI.SetActive(false);
         }  
     }
-
-
 
     private void Awake(){
         resumeButton.onClick.AddListener(() =>

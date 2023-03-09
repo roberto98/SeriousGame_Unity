@@ -21,7 +21,7 @@ public class Timer : MonoBehaviour
             player.GetComponent<Player>().enabled = false; // disable GameInput script
         } else {
             // Update the text object with the current time left
-            timerText.text = "Time left:\n" + Mathf.RoundToInt(timeLeft).ToString();
+            timerText.text = "Time left\n" + Mathf.RoundToInt(timeLeft).ToString();
             player.GetComponent<Player>().enabled = true; // enable GameInput script
         }
 
