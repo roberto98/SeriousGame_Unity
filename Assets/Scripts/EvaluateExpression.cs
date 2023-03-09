@@ -23,6 +23,7 @@ public class EvaluateExpression : MonoBehaviour
         //Debug.Log(expression);
 
         int result = EvaluateMathExpression(expression);
+        Debug.Log("Result is: "+result);
         AssignRandomCells(result);
     }
 
@@ -34,6 +35,10 @@ public class EvaluateExpression : MonoBehaviour
         // Initialize the childObjects array with the correct size 
         childObjects = new Transform[numChildObjects]; 
 
+        // Used to check if the newly generated value is already in the set before assigning it
+        HashSet<int> generatedValues = new HashSet<int>();
+        generatedValues.Add(result);
+
         // Loop through each child object and add it to the array 
         for (int i = 0; i < numChildObjects; i++) { 
             childObjects[i] = transform.GetChild(i);
@@ -42,10 +47,17 @@ public class EvaluateExpression : MonoBehaviour
 
             if (childText != null) {
 
-                int minValue = result-10;
-                int maxValue = result+10;
+                int minValue = result-15;
+                int maxValue = result+15;
 
-                int randomValue = random.Next(minValue, maxValue+1);
+                // If the hashset contains the randomvalue generate a new one.
+                int randomValue;
+                do {
+                    randomValue = random.Next(minValue, maxValue+1);
+                } while (generatedValues.Contains(randomValue));
+
+                generatedValues.Add(randomValue);
+
                 childText.text = randomValue.ToString();
             }
         } 

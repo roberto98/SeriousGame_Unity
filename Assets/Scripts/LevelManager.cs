@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -18,7 +19,9 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("You have reached the maximum level!");
+            //Load Winner Scene
+            SceneManager.LoadScene("FinishGame");
+            //Debug.Log("You have reached the maximum level!");
         }
     }
 
