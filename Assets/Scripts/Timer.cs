@@ -17,7 +17,7 @@ public class Timer : MonoBehaviour
         if (timeLeft < 0)
         {   
             // Perform the actions you want to do at the end of the timer
-            timerText.text = "No more time.";
+            timerText.text = "";
             player.GetComponent<Player>().enabled = false; // disable GameInput script
         } else {
             // Update the text object with the current time left

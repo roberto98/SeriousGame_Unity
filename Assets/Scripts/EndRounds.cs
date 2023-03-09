@@ -9,6 +9,7 @@ public class EndRounds : MonoBehaviour
 {
     public GenerateExpression generateExpression;
     public EvaluateExpression evaluateExpression;
+    public SoundsController soundsController;
     public Timer timer;
     public Player player;
     public TMP_Text countdownLevel;
@@ -19,6 +20,7 @@ public class EndRounds : MonoBehaviour
 
     void Start(){
         trueCell = evaluateExpression.indexTrueCell;
+        //winSound.GetComponent<AudioSource>();
     }
 
     void Update(){
@@ -26,35 +28,36 @@ public class EndRounds : MonoBehaviour
         if(!timer.OnTime(timer.timeLeft)){
 
             if(player.playerInPlane){
-                if(player.triggeredCell == trueCell){
-                    // Player win -> go next level
+                if(player.triggeredCell == trueCell){ // Player win -> go next level
+                    
                     roundTimer-=Time.deltaTime;
+
+                    soundsController.PlayWin();
                     // Countdown before next Level
                     countdownLevel.text = "YOU WIN!\nNext round in...\n"+Mathf.RoundToInt(roundTimer).ToString();
 
                     if(roundTimer<=0){
-                        levelManager.LevelComplete();
-                        SceneManager.LoadScene("GameScene");
+                        levelManager.LevelComplete();                    
                     }
 
-                } else {
-                    // Player lose -> Load scene GameOver
+                } else { // Player lose -> Load scene GameOver
+                    
                     roundTimer-=Time.deltaTime;
+                    soundsController.PlayLose();
                     countdownLevel.text = "YOU LOSE!\nBack to menu in...\n"+Mathf.RoundToInt(roundTimer).ToString();
 
                     if(roundTimer<=0){
                         levelManager.GameOver();
-                        SceneManager.LoadScene("MainMenuScene");
                     }
                 }
 
             } else {
                     roundTimer-=Time.deltaTime;
+                    soundsController.PlayLose();
                     countdownLevel.text = "YOU LOSE!\nBack to menu in...\n"+Mathf.RoundToInt(roundTimer).ToString();
 
                     if(roundTimer<=0){
                         levelManager.GameOver();
-                        SceneManager.LoadScene("MainMenuScene");
                     }
                 //Debug.Log("Game Over");
             }
