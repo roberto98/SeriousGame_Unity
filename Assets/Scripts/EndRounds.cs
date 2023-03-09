@@ -47,6 +47,12 @@ public class EndRounds : MonoBehaviour
                 }
 
             } else {
+                    roundTimer-=Time.deltaTime;
+                    countdownLevel.text = "YOU LOSE!\nBack to menu in...\n"+Mathf.RoundToInt(roundTimer).ToString();
+
+                    if(roundTimer<=0){
+                        SceneManager.LoadScene("MainMenuScene");
+                    }
                 Debug.Log("Game Over");
             }
         }
