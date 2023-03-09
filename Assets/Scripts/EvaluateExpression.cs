@@ -3,29 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+using System.Data;
 
 public class EvaluateExpression : MonoBehaviour
 {
-
-    public TMP_Text expressionText;
+    public GenerateExpression generateExpression;
     private TMP_Text childText;
-
     private System.Random random;
     
     public Transform[] childObjects;
     public int indexTrueCell;
-
+    
     void Start()
     {
         random = new System.Random();
 
-        string expression =  expressionText.text;
+        string expression = generateExpression.expression;
+        //Debug.Log(expression);
 
-        float result = EvaluateMathExpression(expression);
+        int result = EvaluateMathExpression(expression);
         AssignRandomCells(result);
     }
 
-    void AssignRandomCells(float result){
+    void AssignRandomCells(int result){
         
         // Get the number of child objects 
         int numChildObjects = transform.childCount; 
@@ -41,10 +42,10 @@ public class EvaluateExpression : MonoBehaviour
 
             if (childText != null) {
 
-                float minValue = result-10;
-                float maxValue = result+10;
+                int minValue = result-10;
+                int maxValue = result+10;
 
-                double randomValue = (float)(random.NextDouble() * (maxValue - minValue) + minValue);
+                int randomValue = random.Next(minValue, maxValue+1);
                 childText.text = randomValue.ToString();
             }
         } 
@@ -55,52 +56,11 @@ public class EvaluateExpression : MonoBehaviour
 
     } 
 
-    public float EvaluateMathExpression(string expression)
+    public int EvaluateMathExpression(string expression)
     {
-        string[] elements = expression.Split(' ');
-
-        float num1 = float.Parse(elements[0]);
-        string op1 = elements[1];
-        float num2 = float.Parse(elements[2]);
-        string op2 = elements[3];
-        float num3 = float.Parse(elements[4]);
-
-        float result = 0f;
-
-        if (op1 == "+")
-        {
-            result = num1 + num2;
-        }
-        else if (op1 == "-")
-        {
-            result = num1 - num2;
-        }
-        else if (op1 == "*")
-        {
-            result = num1 * num2;
-        }
-        else if (op1 == "/")
-        {
-            result = num1 / num2;
-        }
-
-        if (op2 == "+")
-        {
-            result += num3;
-        }
-        else if (op2 == "-")
-        {
-            result -= num3;
-        }
-        else if (op2 == "*")
-        {
-            result *= num3;
-        }
-        else if (op2 == "/")
-        {
-            result /= num3;
-        }
-
+        DataTable dataTable = new DataTable();
+        int result = Convert.ToInt32(dataTable.Compute(expression, null));
         return result;
     }
+
 }

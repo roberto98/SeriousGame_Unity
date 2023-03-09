@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public int currentLevel = 1; // Starting level
-    public int maxLevel = 10; // Maximum level
+    public int maxLevel = 5; // Maximum level
 
     // This method is called whenever the player completes a level
     public void LevelComplete()
