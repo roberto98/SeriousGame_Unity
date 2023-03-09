@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 public class GenerateExpression : MonoBehaviour
 {
-    public int currentLevel = 0;
+    public LevelManager levelManager;
     public TMP_Text expressionText;
 
 
@@ -15,6 +15,7 @@ public class GenerateExpression : MonoBehaviour
     void Start()
     {
         random = new System.Random();
+        int currentLevel = levelManager.currentLevel;
         string expression = GenerateMathExpression(currentLevel);
         expressionText.text = expression + " = ?";
     }
@@ -28,7 +29,7 @@ public class GenerateExpression : MonoBehaviour
         string op1, op2, expression;
         string[] operators = new string[] { "+", "-", "*", "/"};
 
-        if(currentLevel==0){
+        if(currentLevel==1){
             minNumber = 1;
             maxNumber = 10;
             /*
