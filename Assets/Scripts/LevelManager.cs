@@ -11,6 +11,22 @@ public class LevelManager : MonoBehaviour
     public int maxLevel = 5; // Maximum level
     public TMP_Text levelText;
 
+    private void Start() {
+        if (PlayerPrefs.HasKey("currentLevel")) // If the current level is stored as a player preference
+        {
+            currentLevel = PlayerPrefs.GetInt("currentLevel"); // Load the current level from the player preference
+        }
+    }
+
+    private void Update(){
+        levelText.text = "Level "+currentLevel;
+
+    }
+
+    private void OnApplicationQuit() {
+        PlayerPrefs.SetInt("currentLevel", currentLevel); // Save the current level as a player preference when the game is closed
+    }
+
     // This method is called whenever the player completes a level
     public void LevelComplete()
     {
@@ -40,22 +56,4 @@ public class LevelManager : MonoBehaviour
         //Debug.Log("Game Over! Level reset to " + currentLevel);
     }
 
-
-    private void Start()
-    {
-        if (PlayerPrefs.HasKey("currentLevel")) // If the current level is stored as a player preference
-        {
-            currentLevel = PlayerPrefs.GetInt("currentLevel"); // Load the current level from the player preference
-        }
-    }
-
-    private void Update(){
-        levelText.text = "Level "+currentLevel;
-
-    }
-
-    private void OnApplicationQuit()
-    {
-        PlayerPrefs.SetInt("currentLevel", currentLevel); // Save the current level as a player preference when the game is closed
-    }
 }
