@@ -4,22 +4,37 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Data;
+using System;
+using Random = UnityEngine.Random;
+
 public class GenerateExpression : MonoBehaviour
 {
     public LevelManager levelManager;
     public TMP_Text expressionText;
-    public string expression;
-
-    private System.Random random;
+    private string expression;
+    public int intResult;
 
     void Start()
     {
-        random = new System.Random();
         int currentLevel = levelManager.currentLevel;
-        expression = GenerateMathExpression(currentLevel);
+        float result;
+
+        do
+        {
+            expression = GenerateMathExpression(currentLevel);
+            //Debug.Log(expression);
+
+            result = EvaluateMathExpression(expression);
+        }
+        while (!Mathf.Approximately(result, Mathf.Round(result)));
+
+        intResult = Mathf.RoundToInt(result);
         expressionText.text = expression + " = ?";
+        Debug.Log("Result is: " + intResult);
+
     }
-    
+
     public string GenerateMathExpression(int currentLevel)
     {
         int minNumber = 1;
@@ -225,6 +240,13 @@ public class GenerateExpression : MonoBehaviour
     }
 
 
-    
+    public float EvaluateMathExpression(string expression)
+    {
+        DataTable dataTable = new DataTable();
+        float result = Convert.ToSingle(dataTable.Compute(expression, null));
+        return result;
+    }
+
+
 }
 

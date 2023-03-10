@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
 
     // I show on the unity editor the variable to modify, and i keep it private so other classes cannot modify it
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed = 15f;
     [SerializeField] private GameInput gameInput;
 
     private Vector3 lastInteractDir;

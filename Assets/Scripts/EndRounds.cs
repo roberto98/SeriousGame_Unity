@@ -8,7 +8,7 @@ using TMPro;
 public class EndRounds : MonoBehaviour
 {
     public GenerateExpression generateExpression;
-    public EvaluateExpression evaluateExpression;
+    public InitializeCells initializeCells;
     public SoundsController soundsController;
     public Timer timer;
     public Player player;
@@ -20,7 +20,7 @@ public class EndRounds : MonoBehaviour
     private bool hasPlayedSound = false;
     
     void Start(){
-        trueCell = evaluateExpression.indexTrueCell;
+        trueCell = initializeCells.indexTrueCell;
     }
 
     void Update(){
